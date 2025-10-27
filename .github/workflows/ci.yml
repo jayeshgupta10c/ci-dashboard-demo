@@ -1,26 +1,24 @@
-name: CI
+name: CI Dashboard Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test -- --watchAll=false || echo "tests failed"
-      - name: Send data to webhook
+      - name: Simulate build/test
         run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{"status":"${{ job.status }}","time":"${{ github.run_attempt }}"}' \
-          http://185.107.56.145:4000/webhook
+          echo "Running tests..."
+          # simulate build result
+          STATUS="success"
+          COVERAGE=$((RANDOM % 100 + 1))
+          DEFECTS=$((RANDOM % 5))
+          curl -X POST http:// 10.2.0.2:4000/webhook \
+            -H "Content-Type: application/json" \
+            -d "{\"status\":\"$STATUS\", \"coverage\":$COVERAGE, \"defects\":$DEFECTS}"
