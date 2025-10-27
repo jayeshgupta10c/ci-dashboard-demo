@@ -17,20 +17,25 @@ function App() {
         <p>No builds yet</p>
       ) : (
         <table border="1" cellPadding="10">
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {builds.map((b, i) => (
-              <tr key={i}>
-                <td>{b.status}</td>
-                <td>{b.time}</td>
-              </tr>
-            ))}
-          </tbody>
+         <thead>
+  <tr>
+    <th>Status</th>
+    <th>Time</th>
+    <th>Coverage (%)</th>
+    <th>Defects</th>
+  </tr>
+</thead>
+<tbody>
+  {builds.map((b, i) => (
+    <tr key={i}>
+      <td>{b.status}</td>
+      <td>{b.time}</td>
+      <td>{b.coverage}</td>
+      <td>{b.defects}</td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       )}
     </div>
